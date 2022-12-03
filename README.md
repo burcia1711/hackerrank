@@ -1,2 +1,2 @@
 # hackerrank
-my solutions for hackerrank questions
+my solutions for hackerrank questions (generally with Python)
