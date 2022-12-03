@@ -1,6 +1,15 @@
-if __name__ == '__main__':
-    n = int(input())
+def is_leap(year):
+    leap = False
+    if year % 4 == False:
+        if year % 100 == False:
+            if year % 400 == False:
+                leap = True
+            else:
+                leap = False
+        else:
+            leap = True
+    else:
+        leap = False
 
-if n >= 1 and n <= 20:
-    for i in range(n):
-        print(i ** 2)
+    return leap
+
