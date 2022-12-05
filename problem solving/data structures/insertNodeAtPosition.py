@@ -6,70 +6,49 @@ import random
 import re
 import sys
 
-class SinglyLinkedListNode:
-    def __init__(self, node_data):
-        self.data = node_data
-        self.next = None
-
-class SinglyLinkedList:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-
-    def insert_node(self, node_data):
-        node = SinglyLinkedListNode(node_data)
-
-        if not self.head:
-            self.head = node
-        else:
-            self.tail.next = node
-
-
-        self.tail = node
-
-def print_singly_linked_list(node, sep, fptr):
-    while node:
-        fptr.write(str(node.data))
-
-        node = node.next
-
-        if node:
-            fptr.write(sep)
 
 #
-# Complete the 'insertNodeAtPosition' function below.
+# Complete the 'kangaroo' function below.
 #
-# The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+# The function is expected to return a STRING.
 # The function accepts following parameters:
-#  1. INTEGER_SINGLY_LINKED_LIST llist
-#  2. INTEGER data
-#  3. INTEGER position
+#  1. INTEGER x1
+#  2. INTEGER v1
+#  3. INTEGER x2
+#  4. INTEGER v2
 #
 
-#
-# For your reference:
-#
-# SinglyLinkedListNode:
-#     int data
-#     SinglyLinkedListNode next
-#
-#
-
-def insertNodeAtPosition(llist, data, position):
-    # Write your code here
-    node = SinglyLinkedListNode(data)
-    if position == 0:
-        llist = node
+def kangaroo(x1, v1, x2, v2):
+    res = False
+    i = 1
+    if v2 > v1:
+        if x2 > x1:
+            return "NO"
     else:
-        prev = llist
-        cur = prev.next
-        i=0
-        while i<(position-1):
-            prev = prev.next
-            cur = cur.next
-            i+=1
-        prev.next = node
-        node.next = cur
-    return llist
+        for i in range(10000):
+            f_pos = x1 + (i * v1)
+            s_pos = x2 + (i * v2)
+            if (f_pos == s_pos):
+                return "YES"
+                res = True
+        return "NO"
+
 
 if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    x1 = int(first_multiple_input[0])
+
+    v1 = int(first_multiple_input[1])
+
+    x2 = int(first_multiple_input[2])
+
+    v2 = int(first_multiple_input[3])
+
+    result = kangaroo(x1, v1, x2, v2)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
