@@ -6,61 +6,46 @@ import random
 import re
 import sys
 
-class SinglyLinkedListNode:
-    def __init__(self, node_data):
-        self.data = node_data
-        self.next = None
-
-class SinglyLinkedList:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-
-    def insert_node(self, node_data):
-        node = SinglyLinkedListNode(node_data)
-
-        if not self.head:
-            self.head = node
-        else:
-            self.tail.next = node
-
-
-        self.tail = node
-
-def print_singly_linked_list(node, sep):
-    while node:
-        print(node.data, end='')
-
-        node = node.next
-
-        if node:
-            print(sep, end='')
-
 #
-# Complete the 'reversePrint' function below.
+# Complete the 'getTotalX' function below.
 #
-# The function accepts INTEGER_SINGLY_LINKED_LIST llist as parameter.
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY a
+#  2. INTEGER_ARRAY b
 #
 
-#
-# For your reference:
-#
-# SinglyLinkedListNode:
-#     int data
-#     SinglyLinkedListNode next
-#
-#
-
-def reversePrint(llist):
-    head=llist
-    if llist is None:
-        return
-    else:
-        arr1=[]
-        while head:
-            arr1.insert(0,head.data)
-            head=head.next
-        for i in arr1:
-            print(i)
+def getTotalX(a, b):
+    count=0
+    for i in range (max(a),min(b)+1):
+        factor=True
+        for j in a:
+            if i%j!=0:
+                factor=False
+                break
+        for k in b:
+            if k%i!=0:
+                factor=False
+                break
+        if factor==True:
+            count+=1
+    return count
 
 if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    m = int(first_multiple_input[1])
+
+    arr = list(map(int, input().rstrip().split()))
+
+    brr = list(map(int, input().rstrip().split()))
+
+    total = getTotalX(arr, brr)
+
+    fptr.write(str(total) + '\n')
+
+    fptr.close()
