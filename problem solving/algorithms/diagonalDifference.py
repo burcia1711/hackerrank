@@ -6,32 +6,33 @@ import random
 import re
 import sys
 
-
 #
-# Complete the 'plusMinus' function below.
+# Complete the 'diagonalDifference' function below.
 #
-# The function accepts INTEGER_ARRAY arr as parameter.
+# The function is expected to return an INTEGER.
+# The function accepts 2D_INTEGER_ARRAY arr as parameter.
 #
 
-def plusMinus(arr):
-    ratios = [0, 0, 0]
-    n = len(arr)
-    for i in arr:
-        if i > 0:
-            ratios[0] += 1
-        elif i < 0:
-            ratios[1] += 1
-        else:
-            ratios[2] += 1
-
-    print("{:.6f}".format(ratios[0] / n))
-    print("{:.6f}".format(ratios[1] / n))
-    print("{:.6f}".format(ratios[2] / n))
-
+def diagonalDifference(arr):
+    sums =[0,0]
+    n=len(arr)
+    for i in range(n):
+        sums[0]+=arr[i][i]
+        sums[1]+=arr[i][n-i-1]
+    return abs(sums[0]-sums[1])
 
 if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
     n = int(input().strip())
 
-    arr = list(map(int, input().rstrip().split()))
+    arr = []
 
-    plusMinus(arr)
+    for _ in range(n):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    result = diagonalDifference(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

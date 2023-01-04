@@ -20,11 +20,11 @@ def countingSort(arr):
     for i in range(len(arr)):
         result[arr[i]] += 1
 
-    for i in range(len(result)):
-        for count in range(result[i]):
-            sorted.append(i)
+    #    for i in range(len(result)):
+    #        for count in range(result[i]):
+    #            sorted.append(i)
 
-    return sorted
+    return result
 
 
 if __name__ == '__main__':
